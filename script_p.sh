@@ -18,7 +18,7 @@ sudo systemctl enable haproxy
 
 
 
-# 
+
 
 sudo cp /vagrant/haproxy.cfg /etc/haproxy/haproxy.cfg
 sudo systemctl restart haproxy

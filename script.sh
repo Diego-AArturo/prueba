@@ -30,6 +30,4 @@ npm install express
 
 echo "index$NODE_NAME.html"
 sudo cp /vagrant/index$NODE_NAME.html  /var/www/html/index.html
-# consul agent -server -bootstrap-expect=2 -node=$NODE_NAME -bind=$BIND_IP -data-dir=/tmp/consul -enable-script-checks=true -config-dir=/etc/consul.d
-
 
