@@ -16,6 +16,38 @@ sudo apt update && sudo apt install consul -y
 sudo apt install haproxy -y
 sudo systemctl enable haproxy
 
-sudo cp /vagrant/haproxy.cfg /etc/haproxy/haproxy.cfg
 
+
+cat <<EOF | sudo tee /etc/consul.d/web1.json
+{
+  "service": {
+    "name": "web1",
+    "tags": ["http"],
+    "port": 80,
+    "address": "192.168.100.2",
+    "check": {
+      "http": "http://192.168.100.2:80",
+      "interval": "10s"
+    }
+  }
+}
+EOF
+
+# Crear archivo JSON para registrar web2 en Consul
+cat <<EOF | sudo tee /etc/consul.d/web2.json
+{
+  "service": {
+    "name": "web2",
+    "tags": ["http"],
+    "port": 80,
+    "address": "192.168.100.3",
+    "check": {
+      "http": "http://192.168.100.3:80",
+      "interval": "10s"
+    }
+  }
+}
+EOF
+
+sudo cp /vagrant/haproxy.cfg /etc/haproxy/haproxy.cfg
 sudo systemctl restart haproxy
